@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
+import addresses from './contracts/addresses.json';
+
 declare global {
   interface Window {
     ethereum?: any;
@@ -21,7 +23,7 @@ const EQUITY_ABI = [
   "function balanceOf(address) view returns (uint256)"
 ];
 
-const FACTORY_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"; // New deployed address
+const FACTORY_ADDRESS = addresses.TokenFactory;
 
 function App() {
   const [account, setAccount] = useState<string>("");

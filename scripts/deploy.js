@@ -1,4 +1,6 @@
 import pkg from "hardhat";
+import fs from "fs";
+import path from "path";
 const { ethers, upgrades } = pkg;
 
 async function main() {
@@ -44,7 +46,16 @@ async function main() {
     landImplAddr
   );
   await tokenFactory.waitForDeployment();
-  console.log("TokenFactory deployed to:", await tokenFactory.getAddress());
+  const factoryAddr = await tokenFactory.getAddress();
+  console.log("TokenFactory deployed to:", factoryAddr);
+
+  // Save the address to the frontend
+  const addressesPath = path.join("frontend", "src", "contracts", "addresses.json");
+  const addresses = {
+    TokenFactory: factoryAddr,
+  };
+  fs.writeFileSync(addressesPath, JSON.stringify(addresses, null, 2));
+  console.log(`TokenFactory address saved to ${addressesPath}`);
 }
 
 main()
