@@ -1,15 +1,32 @@
-# Remix compiler artifacts
-**/artifacts/
-**/artifacts/**
+# Dependencies
+node_modules/
 
-# Remix plugin state folders
-deps/
-states/
+# Hardhat
+cache/
+artifacts/
+typechain-types/
+coverage/
+coverage.json
 
-# Debug info
-*.dbg.json
-*.tsbuildinfo
-
-# Optional
+# Environment
 .env
 .env.local
+
+# Build
+dist/
+*.tsbuildinfo
+
+# Debug
+*.dbg.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
