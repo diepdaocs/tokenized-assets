@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useWallet } from '../hooks/useWallet';
 import { useTokenFactory } from '../hooks/useTokenFactory';
-import { ASSET_CATEGORY_LABELS, AssetCategory } from '../config/contracts';
+import { AssetCategory } from '../config/contracts';
 import { getChainConfig, getExplorerUrl } from '../config/chains';
 
 function getCategoryColorClass(category: AssetCategory): string {

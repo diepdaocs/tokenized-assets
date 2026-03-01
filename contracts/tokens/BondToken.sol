@@ -10,6 +10,7 @@ contract BondToken is BaseAssetToken {
     mapping(address => uint256) public lastCouponClaimed;
     uint256 public totalCouponsPaid;
     bool public matured;
+    uint256 public totalSupplyAtMaturity;
 
     event CouponClaimed(address indexed holder, uint256 amount);
     event BondRedeemed(address indexed holder, uint256 amount);
@@ -84,6 +85,7 @@ contract BondToken is BaseAssetToken {
 
         if (!matured) {
             matured = true;
+            totalSupplyAtMaturity = totalSupply();
             emit BondMatured(bondTerms.maturityDate);
         }
 
@@ -91,9 +93,9 @@ contract BondToken is BaseAssetToken {
         if (balance == 0)
             revert AssetTypes.InvalidParameter("no bonds to redeem");
 
-        // Proportional face value: (holderBalance / totalSupply) * faceValue
+        // Proportional face value: (holderBalance / supplyAtMaturity) * faceValue
         uint256 redemptionAmount = (bondTerms.faceValue * balance) /
-            totalSupply();
+            totalSupplyAtMaturity;
 
         if (address(this).balance < redemptionAmount)
             revert AssetTypes.InsufficientFunds();

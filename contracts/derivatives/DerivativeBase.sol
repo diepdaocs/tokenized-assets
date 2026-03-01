@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol"
 import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuardTransient.sol";
 import "../interfaces/IComplianceRegistry.sol";
 import "../interfaces/IPriceOracle.sol";
 import "../libraries/AssetTypes.sol";
@@ -15,7 +15,7 @@ abstract contract DerivativeBase is
     AccessControlUpgradeable,
     PausableUpgradeable,
     UUPSUpgradeable,
-    ReentrancyGuard
+    ReentrancyGuardTransient
 {
     bytes32 public constant OPERATOR_ROLE = keccak256("OPERATOR_ROLE");
 
@@ -65,8 +65,6 @@ abstract contract DerivativeBase is
     ) internal onlyInitializing {
         __AccessControl_init();
         __Pausable_init();
-
-        // ReentrancyGuard uses transient storage, no init needed
 
         complianceRegistry = IComplianceRegistry(registry);
         priceOracle = IPriceOracle(oracle);

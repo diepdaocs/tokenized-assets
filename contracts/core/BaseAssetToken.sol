@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20Pausable
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuardTransient.sol";
 import "../interfaces/IComplianceRegistry.sol";
 import "../interfaces/IPriceOracle.sol";
 import "../libraries/AssetTypes.sol";
@@ -17,7 +17,7 @@ abstract contract BaseAssetToken is
     ERC20PausableUpgradeable,
     AccessControlUpgradeable,
     UUPSUpgradeable,
-    ReentrancyGuard
+    ReentrancyGuardTransient
 {
     bytes32 public constant ISSUER_ROLE = keccak256("ISSUER_ROLE");
     bytes32 public constant OPERATOR_ROLE = keccak256("OPERATOR_ROLE");
@@ -43,8 +43,6 @@ abstract contract BaseAssetToken is
         __ERC20_init(name_, symbol_);
         __ERC20Pausable_init();
         __AccessControl_init();
-
-        // ReentrancyGuard uses transient storage, no init needed
 
         complianceRegistry = IComplianceRegistry(registry);
         priceOracle = IPriceOracle(oracle);

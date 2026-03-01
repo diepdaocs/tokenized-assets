@@ -198,7 +198,7 @@ describe("FuturesContract", function () {
     });
 
     it("should have positive PnL for long when price increases", async function () {
-      const { futures, investor1, priceFeed } = await loadFixture(
+      const { futures, investor1, investor2, priceFeed } = await loadFixture(
         deployFuturesFixture
       );
 
@@ -207,6 +207,12 @@ describe("FuturesContract", function () {
       await futures
         .connect(investor1)
         .openPosition(true, 1, { value: margin });
+
+      // Open an offsetting short so the contract has enough ETH for payouts
+      // Deposit enough to cover the expected PnL
+      await futures
+        .connect(investor2)
+        .openPosition(false, 1, { value: 50000000000n });
 
       // Price goes to $2500 (250000000000 with 8 decimals)
       await priceFeed.setPrice(250000000000n);
@@ -229,7 +235,7 @@ describe("FuturesContract", function () {
     });
 
     it("should have positive PnL for short when price drops", async function () {
-      const { futures, investor1, priceFeed } = await loadFixture(
+      const { futures, investor1, investor2, priceFeed } = await loadFixture(
         deployFuturesFixture
       );
 
@@ -238,6 +244,12 @@ describe("FuturesContract", function () {
       await futures
         .connect(investor1)
         .openPosition(false, 1, { value: margin });
+
+      // Open an offsetting long so the contract has enough ETH for payouts
+      // Deposit enough to cover the expected PnL
+      await futures
+        .connect(investor2)
+        .openPosition(true, 1, { value: 50000000000n });
 
       // Price drops to $1500 (150000000000 with 8 decimals)
       await priceFeed.setPrice(150000000000n);
