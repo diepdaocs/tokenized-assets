@@ -170,9 +170,9 @@ export interface DeployedAddresses {
 
 export const DEPLOYED_ADDRESSES: Record<number, DeployedAddresses> = {
   31337: {
-    tokenFactory: '0x0000000000000000000000000000000000000000',
-    complianceRegistry: '0x0000000000000000000000000000000000000000',
-    priceOracle: '0x0000000000000000000000000000000000000000',
+    tokenFactory: '0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e',
+    complianceRegistry: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+    priceOracle: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9',
   },
   11155111: {
     tokenFactory: '0x0000000000000000000000000000000000000000',

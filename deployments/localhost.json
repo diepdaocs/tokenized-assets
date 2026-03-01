@@ -2,7 +2,7 @@
   "network": "localhost",
   "chainId": 31337,
   "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-  "deployedAt": "2026-03-01T13:29:28.037Z",
+  "deployedAt": "2026-03-01T13:34:51.656Z",
   "contracts": {
     "complianceRegistry": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
     "priceOracle": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
